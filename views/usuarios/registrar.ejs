@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/usuarios/register.css' />
+        <link rel="stylesheet" href="/stylesheets/necolas.github.io_normalize.css_8.0.1_normalize.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Tektur&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="header">
+            <a href="#" class="logo">CIRDC</a>
+    
+            <nav class="navC">
+                <a href="#" class="nav_a">¿Que es CIRDC?</a>
+                <a href="#" class="nav_a">Agrega Información</a>
+                <a href="#" class="nav_a">Colabora</a>
+                <a href="../index.html" class="nav_a">Login</a>
+            </nav>
+        </header>
+    
+        <form action="" class="formC" method="post">
+            <div class="form_div">
+                <div class="form_div_div">
+                    <h2 class="login">Registrate</h2>
+    
+                    <label for="nombre">
+                        <input type="text" name="nombre" id="nombre" class="input inname" placeholder="Nombre">
+                    </label>
+                    <br>
+                    <label for="apellido">
+                        <input type="text" name="apellido" id="apellido" class="input inLastN" placeholder="Apellido">
+                    </label> 
+    
+                    <label for="usuario">
+                        <input type="text" name="usuario" id="usuario" class="input inemail" placeholder="Username">
+                    </label>
+                    <br>
+
+                    <label for="password" class="passLabel">
+                        <input type="password" name="password" id="password" class="input inpass" placeholder="Contraseña">
+                    </label>
+    
+                    <label for="password" class="passLabel">
+                        <input type="password" name="password" id="password" class="input inpass" placeholder="Repite la contraseña">
+                    </label>
+    
+                    <button type="submit" class="loginButton" name="send">Crear Cuenta</button>
+    
+                    <p class="newA">¿Ya tienes cuenta? <br> <a href="/usuarios/login" class="a_newA">Inicia Sesión</a></p>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

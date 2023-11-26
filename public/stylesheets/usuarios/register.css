@@ -1,0 +1,167 @@
+body{
+    background-image: url(/images/523425.jpg);
+    background-size: cover;
+  
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(123, 117, 128, 0.322);
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    z-index: 1000;
+}
+
+.logo{
+    font-family: 'Orbitron', sans-serif;
+    /*font-family: 'Almarai', sans-serif;*/
+    font-size: 30px;
+    font-weight:lighter;
+    color: #ffffff;
+    margin-left: 20px;
+}
+
+.logo:hover{
+    transition: all .5s;
+    text-shadow: 4px 0px 9px rgba(255,255,255,0.6);
+}
+
+.navC{
+    margin-right: 100px;
+}
+
+a{
+    color: #fff;
+    text-decoration: none;
+}
+
+
+.navC > a{
+    font-family: 'Orbitron', sans-serif;
+    padding-right: 50px;
+}
+
+.nav_a:hover{
+    transition: all .5s;
+    text-shadow: 4px 0px 9px rgba(255,255,255,0.6);
+
+}
+
+.login{
+    margin-bottom: 40px;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.formC{
+    color: #f0f0f0;
+}
+
+.form_div {
+    background-color: rgba(123, 117, 128, 0.267);
+    width: 400px;
+    height: 610px;
+    border: solid rgb(153, 153, 153) 2px;
+    border-radius: 8px;
+    position: relative;
+    margin: 60px auto;
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 1;
+    top: -30px;
+}
+
+.form_div_div{
+    text-align: center;
+    width: 300px;
+    margin: 30px auto;
+    align-items: center;
+}
+
+
+.input{
+    background-color: rgb(255, 255, 255);
+    width: 300px;
+    height: 40px;
+    border-radius: 2px;
+    border: none;
+    margin-bottom: 10px;
+    margin-top:10px;
+    text-align: center;
+}
+
+.input:focus{
+    outline: 2px solid #6783ff;
+}
+
+.loginButton{
+    margin-top: 30px;
+    width: 300px;
+    height: 40px;
+    background-color: #6783ffab;
+    border: none;
+    border-radius: 2px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: lighter;
+}
+
+
+.loginButton:hover{
+    background-color: #6783ff;
+
+}
+
+/* GLOBAL STYLES */
+body {
+    padding-top: 5em;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* DEMO-SPECIFIC STYLES */
+  .typewriter h1 {
+    color: #fff;
+    font-family: monospace;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation: 
+      typing 3.5s steps(30, end),
+      blink-caret .5s step-end infinite;
+  }
+  
+  /* The typing effect */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  /* The typewriter cursor effect */
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange }
+  }
+
+
+
+
+.newA{
+    font-family: 'Orbitron', sans-serif;
+    margin-top: 30px;
+    color: rgb(255, 255, 255);
+}
+
+.a_newA{
+    color: rgb(84, 255, 255);
+    text-shadow: 4px 0px 9px rgba(255,255,255,0.6);
+}
+
+.a_newA:hover{
+    color: rgb(0, 211, 211);
+    text-shadow: 4px 0px 9px rgba(255,255,255,0.6);
+}

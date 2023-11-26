@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="/stylesheets/usuarios/login.css">
+        <link rel="stylesheet" href="/stylesheets/necolas.github.io_normalize.css_8.0.1_normalize.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Tektur&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+        <title>CIRDC</title>
+    </head>
+    <body>
+        <header class="header">
+            <a href="/Proyecto/" class="logo">CIRDC</a>
+
+            <nav class="navC">
+                <a href="#" class="nav_a">¿Que es CIRDC?</a>
+                <a href="#" class="nav_a">Agrega Información</a>
+                <a href="#" class="nav_a">Colabora</a>
+            </nav>
+        </header>
+
+        <form action="phpCode/phpLogin.php" class="formC" method="POST">
+            <div class="form_div">
+                <div class="form_div_div">
+                    <h2 class="login">Inicia Sesión</h2>
+
+                    <label for="usuario">
+                        <input type="text" name="usuario" id="usuario" class="input inemail" placeholder="Username">
+                    </label>
+                    <br>
+
+                    <label for="password" class="passLabel">
+                        <input type="password" name="password" class="input inpass" placeholder="Contraseña">
+                    </label>
+
+                    <button type="submit" class="loginButton" name="sendLogin">Login</button>
+                    <p class="newA">¿No tienes cuenta? <br> <a href="/usuarios/registrar" class="a_newA">Registrate</a></p>
+                </div>
+            </div>
+        </form>
+
+        <div class="typewriter">
+            <h1>CIRDC "Centro de investigación y <br> recopilación de datos clasificados"</h1>
+        </div>
+
+    </body>
+</html>
