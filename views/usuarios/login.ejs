@@ -16,27 +16,26 @@
     </head>
     <body>
         <header class="header">
-            <a href="/Proyecto/" class="logo">CIRDC</a>
-
-            <nav class="navC">
-                <a href="#" class="nav_a">¿Que es CIRDC?</a>
-                <a href="#" class="nav_a">Agrega Información</a>
-                <a href="#" class="nav_a">Colabora</a>
-            </nav>
+            <%- include('./header'); %>
         </header>
 
-        <form action="phpCode/phpLogin.php" class="formC" method="POST">
+        <form action="/usuarios/login" class="formC" method="POST">
             <div class="form_div">
                 <div class="form_div_div">
                     <h2 class="login">Inicia Sesión</h2>
 
+                    <% if (error) { %>
+                        <strong><%= error %></strong>
+                        <br>
+                    <% } %>
+
                     <label for="usuario">
-                        <input type="text" name="usuario" id="usuario" class="input inemail" placeholder="Username">
+                        <input type="text" name="usuario" id="usuario" class="input inemail" placeholder="Username" required>
                     </label>
                     <br>
 
                     <label for="password" class="passLabel">
-                        <input type="password" name="password" class="input inpass" placeholder="Contraseña">
+                        <input type="password" name="password" class="input inpass" placeholder="Contraseña" required>
                     </label>
 
                     <button type="submit" class="loginButton" name="sendLogin">Login</button>

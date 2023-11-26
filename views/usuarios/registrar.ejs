@@ -14,40 +14,38 @@
     </head>
     <body>
         <header class="header">
-            <a href="#" class="logo">CIRDC</a>
-    
-            <nav class="navC">
-                <a href="#" class="nav_a">¿Que es CIRDC?</a>
-                <a href="#" class="nav_a">Agrega Información</a>
-                <a href="#" class="nav_a">Colabora</a>
-                <a href="../index.html" class="nav_a">Login</a>
-            </nav>
+            <%- include('./header'); %>
         </header>
     
-        <form action="" class="formC" method="post">
+        <form action="/usuarios/registrar" class="formC" method="post">
             <div class="form_div">
                 <div class="form_div_div">
                     <h2 class="login">Registrate</h2>
     
+                    <% if (error) { %>
+                        <strong><%= error %></strong>
+                        <br>
+                    <% } %>
+
                     <label for="nombre">
-                        <input type="text" name="nombre" id="nombre" class="input inname" placeholder="Nombre">
+                        <input type="text" name="nombre" id="nombre" class="input inname" placeholder="Nombre" required>
                     </label>
                     <br>
                     <label for="apellido">
-                        <input type="text" name="apellido" id="apellido" class="input inLastN" placeholder="Apellido">
+                        <input type="text" name="apellido" id="apellido" class="input inLastN" placeholder="Apellido" required>
                     </label> 
     
                     <label for="usuario">
-                        <input type="text" name="usuario" id="usuario" class="input inemail" placeholder="Username">
+                        <input type="text" name="usuario" id="usuario" class="input inemail" placeholder="Username" required>
                     </label>
                     <br>
 
                     <label for="password" class="passLabel">
-                        <input type="password" name="password" id="password" class="input inpass" placeholder="Contraseña">
+                        <input type="password" name="password" id="password" class="input inpass" placeholder="Contraseña" required>
                     </label>
     
                     <label for="password" class="passLabel">
-                        <input type="password" name="password" id="password" class="input inpass" placeholder="Repite la contraseña">
+                        <input type="password" name="password" id="password" class="input inpass" placeholder="Repite la contraseña" required>
                     </label>
     
                     <button type="submit" class="loginButton" name="send">Crear Cuenta</button>

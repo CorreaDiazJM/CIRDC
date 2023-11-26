@@ -7,11 +7,31 @@ const error = {};
 
 
 router.get('/registrar', async (req, res) => {
-    res.render('usuarios/registrar', { title: 'Registrar' });
+    let message = '';
+
+    if (error) {
+        message = error.message
+        error.message = '';
+    };
+
+    res.render('usuarios/registrar', {
+        title: 'Registrar',
+        error: message
+    });
 });
 
 router.get('/login', async (req, res) => {
-    res.render('usuarios/login', { title: 'Login' });
+    let message = '';
+
+    if (error) {
+        message = error.message
+        error.message = '';
+    };
+
+    res.render('usuarios/login', {
+        title: 'Login',
+        error: message
+    });
 });
 
 router.post('/registrar', async (req, res) => {
@@ -23,9 +43,24 @@ router.post('/registrar', async (req, res) => {
                 error.message = message;
                 res.redirect('/usuarios/registrar');
             })
-            .then((token) => {
-                
-            });
+            .then((token) => res.redirect('/'));
+    } else {
+        res.redirect('/usuarios/register');
+    }
+});
+
+router.post('/login', async (req, res) => {
+    if (req.body.usuario && req.body.password) {
+        const { usuario, password } = req.body;
+
+        await UsuariosController.login(usuario, password)
+            .catch((message) => {
+                error.message = message;
+                res.redirect('/usuarios/login');
+            })
+            .then((token) => res.redirect('/'));
+    } else {
+        res.redirect('/usuarios/login');
     }
 });
 
