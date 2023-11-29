@@ -2,7 +2,7 @@
 <html>
     <head>
         <title><%= title %></title>
-        <link rel='stylesheet' href='/stylesheets/usuarios/register.css' />
+        <link rel='stylesheet' href='/stylesheets/documentos/registrar.css' />
         <link rel="stylesheet" href="/stylesheets/necolas.github.io_normalize.css_8.0.1_normalize.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
             <%- include('../usuarios/header'); %>
         </header>
     
-        <form action="/documentos/ingresar" class="formC" method="post">
+        <div class="formC">
             <div class="form_div">
                 <div class="form_div_div">
                     <h2 class="login">Ingresar Documento</h2>
@@ -27,24 +27,60 @@
                         <br>
                     <% } %>
 
-                    <label for="imagen" class="passLabel">
-                        <input type="image" name="imagen" id="imagen" class="input inpass" placeholder="Repite la contraseña" required>
+                    <label for="imagen">
+                        <input type="file" name="imagen" id="imagen" class="input inname" onchange="encodeImageFileAsURL(this)" required>
                     </label>
 
                     <label for="titulo">
-                        <input type="text" name="titulo" id="titulo" class="input inname" placeholder="Nombre" required>
+                        <input type="text" name="titulo" id="titulo" class="input inname" placeholder="Título" required>
                     </label>
                     <br>
 
                     <label for="contenido" class="passLabel">
-                        <input type="text" name="contenido" id="contenido" class="input inpass" placeholder="Contraseña" required>
+                        <input type="text" name="contenido" id="contenido" class="input inpass" placeholder="Contenido" required>
                     </label>
     
-                    <button type="submit" class="loginButton" name="send">Crear Cuenta</button>
+                    <button type="button" class="loginButton" onclick="formData()">Crear Documento</button>
     
-                    <p class="newA">¿Ya tienes cuenta? <br> <a href="/usuarios/login" class="a_newA">Inicia Sesión</a></p>
+                    <button type="button" class="loginButton"><a href="/documentos">Cancelar</a></button>
                 </div>
             </div>
-        </form>
+        </div>
     </body>
+
+    <script>
+        let imagen;
+
+        async function formData() {
+            const titulo = document.getElementById('titulo').value;
+            const contenido = document.getElementById('contenido').value;
+
+            console.log({
+                titulo,
+                contenido,
+                imagen
+            });
+
+            const response = await fetch('/documentos/ingresar', {
+                method: 'POST',
+                mode: 'cors',
+                // cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify({ titulo, contenido, imagen })
+            });
+        }
+
+        function encodeImageFileAsURL(element) {
+            let file = element.files[0];
+            const reader = new FileReader();
+
+            reader.onloadend = () => imagen = reader.result;
+            reader.readAsDataURL(file);
+        }
+    </script>
 </html>

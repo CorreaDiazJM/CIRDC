@@ -14,10 +14,37 @@ router.get('/', checkLogin, async (req, res) => {
 });
 
 router.get('/ingresar', checkLogin, async (req, res) => {
+    let message = '';
+
+    if (error.message) {
+        message = error.message;
+        error.message = '';
+    }
+
     res.render('documentos/registrar', {
         title: 'Ingresar Documento',
-        error: ''
+        error: message
     });
 });
+
+router.post('/ingresar', checkLogin, async (req, res) => {
+    console.log(req.body);
+
+    if (req.body.imagen && req.body.titulo && req.body.contenido) {
+        const { titulo, contenido, imagen } = req.body;
+        const { rol } = req.token_data;
+        
+        await DocumentosController.insertar(titulo, contenido, rol)
+            .catch((err) => {
+                error.message = err;
+                res.redirect('/documentos/ingresar');
+            })
+            .then(() => res.redirect('/documentos'));
+    } else {
+        error.message = 'Todos los datos son obligatorios';
+        res.redirect('/documentos/ingresar');
+    }
+});
+
 
 module.exports = router;

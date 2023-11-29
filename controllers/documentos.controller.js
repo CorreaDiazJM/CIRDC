@@ -2,9 +2,9 @@ const DocumentosModel = require('../models/documentos.model');
 
 
 class DocumentosController {
-    async insertar(titulo, contenido, imagen, rol) {
+    async insertar(titulo, contenido, rol, usuario) {
         return new Promise((resolve, reject) => {
-            DocumentosModel.insertar(titulo, contenido, imagen, rol)
+            DocumentosModel.insertar(titulo, contenido, rol)
                 .catch((err) => reject(err))
                 .then(() => resolve());
         });
