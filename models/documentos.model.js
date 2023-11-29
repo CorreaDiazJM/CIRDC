@@ -6,8 +6,11 @@ class DocumentosModel {
     async insertar(titulo, contenido, rol, usuario) {
         return new Promise((resolve, reject) => {
             this.mostrarDocumentoPorDatos(titulo, contenido)
-                .catch((err) => {
-                    if (err === 'err') {
+                .catch((err) => reject(err))
+                .then((documento) => {
+                    if (documento.length) {
+                        reject('El documento ya existe');
+                    } else {
                         db.query(
                             'INSERT INTO Documentos (titulo_doc, contenido_doc) VALUES (?, ?);',
                             [titulo, contenido],
@@ -19,7 +22,7 @@ class DocumentosModel {
                                     .then((documento) => {
                                         db.query(
                                             'INSERT INTO Rol_Documento (id_rol_roldoc, id_doc_roldoc) VALUES (?, ?);',
-                                            [rol, documento.id_doc],
+                                            [rol, documento[0].id_doc],
                                             (err) => {
                                                 if (err) reject(err);
                                                 
@@ -28,7 +31,7 @@ class DocumentosModel {
                                                     .then((user) => {
                                                         db.query(
                                                             'INSERT INTO Usuario_Documento (id_usu_usudoc, id_doc_usudoc) VALUES (?, ?);',
-                                                            [user.id_usu, documento.id_doc],
+                                                            [user.id_usu, documento[0].id_doc],
                                                             (err) => {
                                                                 if (err) reject(err);
                                                                 resolve();
@@ -38,8 +41,7 @@ class DocumentosModel {
                                     });
                             });
                     }
-                })
-                .then(() => reject('El documento ya existe'));
+                });
         });
     }
 
@@ -62,8 +64,7 @@ class DocumentosModel {
                 [titulo, contenido],
                 (err, results) => {
                     if (err) reject(err);
-                    if (!results.length) reject('err');
-                    resolve(results[0]);
+                    resolve(results);
                 });
         });
     }

@@ -14,9 +14,16 @@ router.get('/', checkLogin, async (req, res) => {
 });
 
 router.get('/ingresar', checkLogin, async (req, res) => {
+    let message = '';
+
+    if (error.message) {
+        message = error.message;
+        error.message = '';
+    }
+
     res.render('documentos/registrar', {
         title: 'Ingresar Documento',
-        error: ''
+        error: message
     });
 });
 
