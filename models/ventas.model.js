@@ -5,17 +5,22 @@ const UsuarioModel = require('./usuarios.model');
 class VentasModel {
     async ingresar(producto, cantidad, usuario) {
         return new Promise((resolve, reject) => {
-            UsuarioModel.buscarUsuarioPorUsername(usuario)
+            this.buscarProductoPorDatos(producto, usuario)
                 .catch((err) => reject(err))
-                .then((user) => {
-                    db.query(
-                        'INSERT INTO Ventas (producto_ven, cantidad_ven, id_usu_ven) VALUES (?, ?, ?);',
-                        [producto, cantidad, user.id_usu],
-                        (err) => {
-                            if (err) reject(err);
-                            resolve();
-                        });
+                .then((productoData) => {
+                    if (productoData) {
+                        reject('El producto ya está registrado');
+                    } else {
+                        db.query(
+                            'INSERT INTO Ventas (producto_ven, cantidad_ven, id_usu_ven) VALUES (?, ?, ?);',
+                            [producto, cantidad, productoData.id_usu],
+                            (err) => {
+                                if (err) reject(err);
+                                resolve();
+                            });
+                    }
                 });
+
         });
     }
 
@@ -27,6 +32,22 @@ class VentasModel {
                 (err, results) => {
                     if (err) reject(err);
                     resolve(results);
+                });
+        });
+    }
+
+    async buscarProductoPorDatos(producto, usuario) {
+        return new Promise((resolve, reject) => {
+            UsuarioModel.buscarUsuarioPorUsername(usuario)
+                .catch((err) => reject(err))
+                .then((user) => {
+                    db.query(
+                        'SELECT * FROM Ventas INNER JOIN Usuarios ON id_usu = id_usu_ven WHERE producto_ven = ? AND id_usu_ven = ?;',
+                        [producto, user.id_usu],
+                        (err, results) => {
+                            if (err) reject(err);
+                            resolve(results);
+                        });
                 });
         });
     }

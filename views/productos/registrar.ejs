@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/documentos/registrar.css' />
+        <link rel="stylesheet" href="/stylesheets/necolas.github.io_normalize.css_8.0.1_normalize.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Tektur&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header class="header">
+            <a href="#" class="logo">CIRDC</a>
+        </header>
+    
+        <form action="/ventas/registrarProducto" class="formC" method="post">
+            <div class="form_div">
+                <div class="form_div_div">
+                    <h2 class="login">Registrar Producto</h2>
+    
+                    <% if (error) { %>
+                        <strong><%= error %></strong>
+                        <br>
+                    <% } %>
+
+                    <label for="producto">
+                        <input type="text" name="producto" id="producto" class="input inname" placeholder="Producto" required>
+                    </label>
+                    <br>
+
+                    <label for="cantidad">
+                        <input type="number" name="cantidad" id="cantidad" class="input inpass" min="1" value="1" placeholder="Cantidad a ofertar" required>
+                    </label>
+    
+                    <button type="submit" class="loginButton">Registrar Producto</button>
+    
+                    <button class="loginButton"><a href="/ventas">Cancelar</a></button>
+                </div>
+            </div>
+        </form>
+    </body>
+</html>
