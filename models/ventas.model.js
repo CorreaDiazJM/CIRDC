@@ -51,6 +51,28 @@ class VentasModel {
                 });
         });
     }
+
+    async buscarProductoPorId(idVenta) {
+        return new Promise((resolve, reject) => {
+            db.query('SELECT * FROM Ventas WHERE id_ven = ?;', [idVenta])
+        });
+    }
+
+    async aumentarOferta(usuario, producto) {
+        return new Promise((resolve, reject) => {
+            this.buscarProductoPorDatos(producto, usuario)
+                .catch((err) => reject(err))
+                .then((productosData) => {
+                    let { cantidad_ven, id_ven } = productosData;
+                    
+                    cantidad_ven += 1;
+
+                    db.query('UPDATE Ventas SET cantidad_ven = ' + cantidad_ven + ' WHERE id_ven = ' + id_ven)
+                        .catch((err) => reject(err))
+                        .then(() => resolve());
+                });
+        });
+    }
 }
 
 

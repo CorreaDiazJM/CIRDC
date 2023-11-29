@@ -7,6 +7,18 @@ const router = express.Router();
 const error = {};
 
 
+router.use((req, res, next) => {
+    if (req.query._method === 'DELETE') {
+        req.method = 'DELETE';
+        req.url = req.path;
+    } else if (req.query._method === 'PUT') {
+        req.method = 'PUT';
+        req.url = req.path;
+    }
+
+    next(); 
+});
+
 router.get('/', checkLogin, async (req, res) => {
     const { rol } = req.token_data;
 
@@ -49,6 +61,12 @@ router.post('/registrarProducto', checkLogin, async (req, res) => {
         error.message = 'Todos los datos son requeridos';
         res.redirect('/ventas/registrarProducto');
     }
+});
+
+router.put('/aumentarCantidad/:idVenta', checkLogin, async (req, res) => {
+    await VentasController.aumentarOferta(req.params.idVenta)
+        .catch((err) => res.send(err))
+        .then(() => res.redirect('/ventas'));
 });
 
 

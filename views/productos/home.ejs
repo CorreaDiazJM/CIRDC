@@ -31,7 +31,7 @@
                     <p>
                         <strong><%= productos[i].producto_ven %></strong>
                         <%= productos[i].cantidad_ven %>
-                    </p> <a href="#"><img class="plus" src="/images/ventas/190250.png"></a>
+                    </p><a href=<%= '/ventas/aumentarCantidad/' + productos[i].id_ven + '?_method=PUT' %>><img class="plus" src="/images/ventas/190250.png"></a>
                     <span><%= productos[i].usuario_usu %></span>
                 </div>
             <% } %>

@@ -17,6 +17,14 @@ class VentasController {
                 .then((ventas) => resolve(ventas));
         });
     }
+
+    async aumentarOferta(idVenta) {
+        return new Promise((resolve, reject) => {
+            VentasModel.aumentarOferta(idVenta)
+                .catch((err) => reject(err))
+                .then(() => resolve());
+        });
+    }
 }
 
 
