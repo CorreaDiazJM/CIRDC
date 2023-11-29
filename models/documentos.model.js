@@ -48,7 +48,7 @@ class DocumentosModel {
     async mostrar(rol) {
         return new Promise((resolve, reject) => {
             db.query(
-                'SELECT * FROM Documentos INNER JOIN Rol_Documento ON id_doc = id_doc_roldoc WHERE id_rol_roldoc >= ?;',
+                'SELECT titulo_doc, contenido_doc, nombre_usu, apellido_usu FROM Documentos INNER JOIN Rol_Documento ON id_doc = id_doc_roldoc INNER JOIN Usuario_Documento ON id_doc = id_doc_usudoc INNER JOIN Usuarios ON id_usu = id_usu_usudoc WHERE id_rol_roldoc >= ?;',
                 [rol],
                 (err, results) => {
                     if (err) reject(err);

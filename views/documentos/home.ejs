@@ -19,24 +19,18 @@
             <a class="logo" style="user-select: none;">CIRDC</a>
 
             <nav class="navC">
-                <a href="../logout.php" class="nav_a">Cerrar Sesion</a>
-                <a
-                    class="nav_a"
-                    style="display: 'inline-block'"
-                >Archivos de Nivel 4</a>
-                <a
-                    class="nav_a"
-                    style="display: 'inline-block'"
-                >Archivos de Nivel 5</a>
+                <a href="/documentos/ingresar" class="nav_a" style="display: 'inline-block'">Nuevo Documento</a>
+                <a href="/usuarios/logout" class="nav_a">Cerrar Sesion</a>
             </nav>
         </header>
 
         <div class="informes">
-            <div class="informe in1">
-                <h2><%= title %></h2>
-                <img src="style/imgs/manes.jpg" alt="">
-                <p><%= contenido %></p>
-            </div>
+            <% for(var i = 0; i < documentos.length; i++) { %>
+                <div class="informe in1">
+                    <h2><%= documentos[i].titulo_doc %>. Autor: <%= documentos[i].apellido_usu %>, <%= documentos[i].nombre_usu %></h2>
+                    <p><%= documentos[i].contenido_doc %></p>
+                </div>
+            <% } %>
         </div>
     </body>
 </html>

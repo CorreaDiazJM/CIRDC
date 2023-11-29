@@ -8,9 +8,16 @@ const error = {};
 
 
 router.get('/', checkLogin, async (req, res) => {
-    await DocumentosController.mostrar(req.token_data.rol)
+    const { rol } = req.token_data;
+
+    console.log(rol);
+
+    await DocumentosController.mostrar(rol)
         .catch((err) => res.send(err))
-        .then((documentos) => res.send(documentos));
+        .then((documentos) => {
+            console.log(documentos);
+            res.render('documentos/home', { documentos, rol });
+        });
 });
 
 router.get('/ingresar', checkLogin, async (req, res) => {

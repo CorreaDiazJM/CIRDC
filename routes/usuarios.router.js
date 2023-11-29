@@ -1,5 +1,6 @@
 const express = require('express');
 const UsuariosController = require('../controllers/usuarios.controller');
+const { checkLogin } = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -34,6 +35,11 @@ router.get('/login', async (req, res) => {
     });
 });
 
+router.get('/logout', checkLogin, async (req, res) => {
+    res.clearCookie('token_coded');
+    res.redirect('/usuarios/login');
+});
+
 router.post('/registrar', async (req, res) => {
     if (req.body.nombre && req.body.apellido && req.body.usuario && req.body.password) {
         const { nombre, apellido, usuario, password } = req.body;
@@ -43,7 +49,7 @@ router.post('/registrar', async (req, res) => {
                 error.message = message;
                 res.redirect('/usuarios/registrar');
             })
-            .then((token) => res.cookie('token_coded', token).redirect('/'));
+            .then((token) => res.cookie('token_coded', token).redirect('/documentos'));
     } else {
         res.redirect('/usuarios/register');
     }
@@ -58,7 +64,7 @@ router.post('/login', async (req, res) => {
                 error.message = message;
                 res.redirect('/usuarios/login');
             })
-            .then((token) => res.cookie('token_coded', token).redirect('/'));
+            .then((token) => res.cookie('token_coded', token).redirect('/documentos'));
     } else {
         res.redirect('/usuarios/login');
     }
