@@ -43,7 +43,7 @@ router.post('/registrar', async (req, res) => {
                 error.message = message;
                 res.redirect('/usuarios/registrar');
             })
-            .then((token) => res.redirect('/'));
+            .then((token) => res.cookie('token_coded', token).redirect('/'));
     } else {
         res.redirect('/usuarios/register');
     }
@@ -58,7 +58,7 @@ router.post('/login', async (req, res) => {
                 error.message = message;
                 res.redirect('/usuarios/login');
             })
-            .then((token) => res.redirect('/'));
+            .then((token) => res.cookie('token_coded', token).redirect('/'));
     } else {
         res.redirect('/usuarios/login');
     }
