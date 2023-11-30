@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-11-2023 a las 22:06:59
+-- Tiempo de generación: 30-11-2023 a las 05:27:37
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -34,6 +34,23 @@ CREATE TABLE `Comentarios` (
   `id_usu_com` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `Comentarios`
+--
+
+INSERT INTO `Comentarios` (`id_com`, `comentario_com`, `id_doc_com`, `id_usu_com`) VALUES
+(1, 'asdf', 23, 11),
+(2, 'asdf', 23, 11),
+(3, 'fd', 23, 11),
+(4, 'f', 23, 11),
+(5, 's', 23, 11),
+(6, 'avcx', 23, 11),
+(7, 'adrew', 23, 11),
+(25, ' dfs asd', 23, 11),
+(26, 'dfsd df', 23, 11),
+(27, '435ggd', 23, 11),
+(28, '4fg dfg43', 23, 11);
+
 -- --------------------------------------------------------
 
 --
@@ -46,6 +63,28 @@ CREATE TABLE `Compras` (
   `id_comprador_com` int(32) NOT NULL,
   `id_ven_com` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Compras`
+--
+
+INSERT INTO `Compras` (`id_com`, `cantidad_com`, `id_comprador_com`, `id_ven_com`) VALUES
+(1, 1, 11, 3),
+(2, 1, 11, 1),
+(3, 1, 11, 1),
+(4, 1, 11, 4),
+(5, 1, 11, 4),
+(6, 1, 11, 4),
+(7, 1, 11, 4),
+(8, 1, 11, 4),
+(9, 1, 11, 4),
+(10, 1, 11, 4),
+(11, 1, 11, 4),
+(12, 1, 11, 4),
+(13, 1, 11, 4),
+(14, 1, 11, 3),
+(15, 1, 11, 3),
+(16, 1, 11, 3);
 
 -- --------------------------------------------------------
 
@@ -67,21 +106,6 @@ INSERT INTO `Documentos` (`id_doc`, `titulo_doc`, `contenido_doc`) VALUES
 (23, 'abc', 'abc'),
 (24, 'nuevo', ' esto es un nuevo documento'),
 (25, 'prueba', 'oatrañ asdf sdfsñkfjasfñkasjfñaksdfjasñfjañdsfjañsdfjasñdjfasñdfjasñkfdj');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Pagos`
---
-
-CREATE TABLE `Pagos` (
-  `id_pag` int(32) NOT NULL,
-  `id_usu_pag` int(32) NOT NULL,
-  `id_rol_pag` int(32) NOT NULL,
-  `monto_pag` int(10) NOT NULL,
-  `vaucher_pag` varchar(1000) NOT NULL,
-  `validacion_pag` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -148,8 +172,8 @@ CREATE TABLE `Usuarios` (
 
 INSERT INTO `Usuarios` (`id_usu`, `nombre_usu`, `apellido_usu`, `usuario_usu`, `password_usu`, `id_rol_usu`) VALUES
 (6, 'José', 'Correa', 'jose121correa', '$2b$10$aS3LM.E1IM4OhSIT5w1vju..C0ibhNLrXrozixx9c3cMpz9.7vA8a', 6),
-(11, 'José', 'Correa', 'jose', '$2b$10$H0lXChhgQKepW7oIiEXWxe7wuRNuHuY5DH4C5w3a1CZ/Dnym8lG1q', 6),
-(17, 'José', 'Correa', 'admin', '$2b$10$iqtKrqhKdyoT.zFDnuVuzeKZviostS1gO3R4WtXbD91Ns15H6sOgC', 1),
+(11, 'Impostor 1', 'Correa', 'jose', '$2b$10$H0lXChhgQKepW7oIiEXWxe7wuRNuHuY5DH4C5w3a1CZ/Dnym8lG1q', 5),
+(17, 'Admin', 'Correa', 'admin', '$2b$10$iqtKrqhKdyoT.zFDnuVuzeKZviostS1gO3R4WtXbD91Ns15H6sOgC', 1),
 (18, 'José', 'García', 'jsgarcia', '$2b$10$eERG5Ix6AMMH8vqhq.KHF.w6tDjFe12YmlCLNvxl9lW303FytrphC', 6);
 
 -- --------------------------------------------------------
@@ -191,7 +215,11 @@ CREATE TABLE `Ventas` (
 --
 
 INSERT INTO `Ventas` (`id_ven`, `producto_ven`, `cantidad_ven`, `id_usu_ven`) VALUES
-(1, 'cabezas', 20, 6);
+(1, 'cabezas', 20, 6),
+(3, 'scsc', 7, 6),
+(4, 'dasdsa', 35, 6),
+(5, 'cabezas', 17, 17),
+(6, 'scsc', 49, 11);
 
 --
 -- Índices para tablas volcadas
@@ -218,12 +246,6 @@ ALTER TABLE `Compras`
 --
 ALTER TABLE `Documentos`
   ADD PRIMARY KEY (`id_doc`);
-
---
--- Indices de la tabla `Pagos`
---
-ALTER TABLE `Pagos`
-  ADD PRIMARY KEY (`id_pag`);
 
 --
 -- Indices de la tabla `Roles`
@@ -271,25 +293,19 @@ ALTER TABLE `Ventas`
 -- AUTO_INCREMENT de la tabla `Comentarios`
 --
 ALTER TABLE `Comentarios`
-  MODIFY `id_com` int(32) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_com` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `Compras`
 --
 ALTER TABLE `Compras`
-  MODIFY `id_com` int(32) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_com` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `Documentos`
 --
 ALTER TABLE `Documentos`
   MODIFY `id_doc` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
--- AUTO_INCREMENT de la tabla `Pagos`
---
-ALTER TABLE `Pagos`
-  MODIFY `id_pag` int(32) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `Roles`
@@ -307,7 +323,7 @@ ALTER TABLE `Rol_Documento`
 -- AUTO_INCREMENT de la tabla `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  MODIFY `id_usu` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_usu` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `Usuario_Documento`
@@ -319,7 +335,7 @@ ALTER TABLE `Usuario_Documento`
 -- AUTO_INCREMENT de la tabla `Ventas`
 --
 ALTER TABLE `Ventas`
-  MODIFY `id_ven` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_ven` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
