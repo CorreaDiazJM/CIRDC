@@ -9,6 +9,14 @@ class ComprasController {
                 .then(() => resolve());
         });
     }
+
+    async mostrarComprasPorProducto(usuario) {
+        return new Promise((resolve, reject) => {
+            ComprasModel.mostrarComprasPorProducto(usuario)
+                .catch((err) => reject(err))
+                .then((compras) => resolve(compras));
+        });
+    }
 }
 
 

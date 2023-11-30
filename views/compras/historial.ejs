@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/stylesheets/ventas/home.css">
+        <link rel="stylesheet" href="/stylesheets/documentos/home.css">
         <link rel="stylesheet" href="/stylesheets/necolas.github.io_normalize.css_8.0.1_normalize.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,26 +19,16 @@
             <a class="logo" style="user-select: none;">CIRDC</a>
 
             <nav class="navC">
-                <a href="/documentos">Documentos</a>
-                <a href="/compras/historial">Historial de Compras</a>
-                <a href="/ventas/registrarProducto" class="nav_a" style="display: 'inline-block'">Registrar Producto</a>
+                <a href="/ventas">Productos</a>
                 <a href="/usuarios/logout" class="nav_a">Cerrar Sesion</a>
             </nav>
         </header>
 
         <div class="informes">
-            <% for(var i = 0; i < productos.length; i++) { %>
+            <% for(var i = 0; i < compras.length; i++) { %>
                 <div class="informe in1">
-                    <p>
-                        <strong><%= productos[i].producto_ven %></strong>
-                        <%= productos[i].cantidad_ven %>
-                        <% if (productos[i].usuario_usu === usuario) { %>
-                            <a href=<%= '/ventas/aumentarCantidad/' + productos[i].id_ven + '?_method=PUT' %>><img class="plus" src="/images/ventas/190250.png"></a>
-                        <% } else { %>
-                            <button><a href=<%= '/compras/comprar/' + usuario + '/' + productos[i].id_ven + '?_method=POST' %>>Comprar</a></button>
-                        <% } %>
-                    </p>
-                    <span><%= productos[i].usuario_usu %></span>
+                    <h2><%= compras[i].producto_ven %></h2>
+                    <p><%= compras[i].apellido_usu %>, <%= compras[i].nombre_usu %></p>
                 </div>
             <% } %>
         </div>

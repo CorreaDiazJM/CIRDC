@@ -34,6 +34,22 @@ class ComprasModel {
                 });
         });
     }
+
+    async mostrarComprasPorProducto(usuario) {
+        return new Promise((resolve, reject) => {
+            UsuariosModel.buscarUsuarioPorUsername(usuario)
+                .catch((err) => reject(err))
+                .then((user) => {
+                    db.query(
+                        'SELECT * FROM Compras INNER JOIN Ventas ON id_ven_com = id_ven INNER JOIN Usuarios ON id_usu_ven = id_usu WHERE id_comprador_com = ?;',
+                        [user.id_usu],
+                        (err, results) => {
+                            if (err) reject(err);
+                            resolve(results);
+                        });
+                });
+        });
+    }
 }
 
 
