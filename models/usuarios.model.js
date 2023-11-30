@@ -13,7 +13,6 @@ class UsuariosModel {
                     'INSERT INTO Usuarios (nombre_usu, apellido_usu, usuario_usu, password_usu, id_rol_usu) VALUES (?, ?, ?, ?, ?);',
                     [nombre, apellido, usuario, password, rol],
                     (err) => {
-                        console.log(err);
                         if (err && err.errno === 1062) reject('El usuario ya existe');
                         if (err) reject(err);
                         
@@ -58,6 +57,45 @@ class UsuariosModel {
                 if (!results.length) reject('El usuario no está registrado');
                 resolve(results[0]);
             });
+        });
+    }
+
+    async subirDeNivel(usuario) {
+        return new Promise((resolve, reject) => {
+            this.buscarUsuarioPorUsername(usuario)
+                .catch((err) => reject(err))
+                .then((user) => {
+                    db.query(
+                        'SELECT COUNT(id_com) AS cantidad FROM Comentarios INNER JOIN Usuarios ON id_usu = id_usu_com WHERE id_usu = ?;',
+                        [user.id_usu],
+                        (err, results) => {
+                            if (err) reject(err);
+
+                            const cant_com = results[0].cantidad;
+                            let rol = 6;
+
+                            if (cant_com > 10) rol--;
+                            if (cant_com > 50) rol--;
+                            if (cant_com > 100) rol--;
+                            if (cant_com > 300) rol--;
+
+                            db.query(
+                                'UPDATE Usuarios SET id_rol_usu = ? WHERE id_usu = ?;',
+                                [rol, user.id_usu],
+                                (err) => {
+                                    if (err) reject(err);
+
+                                    const token = jwt.sign({
+                                        usuario,
+                                        rol: user.id_rol_usu,
+                                        nombre: user.nombre_usu,
+                                        apellido: user.apellido_usu
+                                    }, process.env.SECRET_KEY);
+            
+                                    resolve(token);
+                                });
+                        });
+                });
         });
     }
 }
