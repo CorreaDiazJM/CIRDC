@@ -56,8 +56,9 @@ a {
     top: 100px;
     background-color: rgba(123, 117, 128, 0.582);
     width: auto;
-    height: 800px;
+    height: auto;
     overflow: auto;
+    margin-bottom: 100px;
 }
 
 img {
@@ -70,7 +71,7 @@ img {
     color: #fff;
     padding: 15px;
     display: inline-block;
-    border: 2px solid #8d8d8d;
+    border: 2px solid #000000;
     margin-top: 30px;
     margin-left: 80px;
     margin-bottom: 25px;
@@ -79,8 +80,60 @@ img {
     width: 550px;
     height: 300px;
     border-radius: 5px;
+    background-color: #8d8d8ddc;
 }
 
 p {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+    font-family: 'Orbitron', sans-serif;
+}
+
+.h3_comentar{
+    text-align: center;
+    font-size: 30px;
+}
+
+#comentario{
+    font-family: 'Orbitron', sans-serif;
+    width: 520px;
+    resize: none;
+    padding: 15px;
+}
+
+.comentario{
+    color: #fff;
+    padding: 15px;
+    display: inline-block;
+    border: 2px solid #000000;
+    margin-top: 30px;
+    margin-left: 80px;
+    overflow:scroll;
+    box-sizing: content-box;
+    width: 550px;
+    height: 100px;
+    border-radius: 5px;
+    background-color: #8d8d8ddc;
+}
+
+.comen_p{
+    width: 100px;
+}
+
+.comentar_button{
+    font-family: 'Orbitron', sans-serif;
+    width: 550px;
+    height: 50px;
+}
+
+
+
+.comentar_click{
+    font-family: 'Orbitron', sans-serif;
+
+    text-align: right;
+    text-decoration: underline;
+    color: #000000;
+}
+
+.comentar_click a {
+    color: rgb(69, 103, 252);
 }
