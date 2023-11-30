@@ -35,7 +35,7 @@
                         <% if (productos[i].usuario_usu === usuario) { %>
                             <a href=<%= '/ventas/aumentarCantidad/' + productos[i].id_ven + '?_method=PUT' %>><img class="plus" src="/images/ventas/190250.png"></a>
                         <% } else { %>
-                            <button><a href=<%= '/compras/comprar/' + usuario + '/' + productos[i].id_ven + '?_method=POST' %>>Comprar</a></button>
+                            <button class="compra" ><a style="color: #000;" href=<%= '/compras/comprar/' + usuario + '/' + productos[i].id_ven + '?_method=POST' %>>Comprar</a></button>
                         <% } %>
                     </p>
                     <span><%= productos[i].usuario_usu %></span>

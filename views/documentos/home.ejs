@@ -28,7 +28,7 @@
         <div class="informes">
             <% for(var i = 0; i < documentos.length; i++) { %>
                 <div class="informe in1">
-                    <h2><%= documentos[i].titulo_doc %>. Autor: <%= documentos[i].apellido_usu %>, <%= documentos[i].nombre_usu %></h2>
+                    <h2><a href=<%= '/comentarios/' + documentos[i].id_doc %>><%= documentos[i].titulo_doc %></a>. Autor: <%= documentos[i].apellido_usu %>, <%= documentos[i].nombre_usu %></h2>
                     <p><%= documentos[i].contenido_doc %></p>
                 </div>
             <% } %>
