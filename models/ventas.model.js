@@ -92,3 +92,4 @@ class VentasModel {
 
 
 module.exports = new VentasModel();
+

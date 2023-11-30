@@ -31,12 +31,10 @@
                     <p>
                         <strong><%= productos[i].producto_ven %></strong>
                         <%= productos[i].cantidad_ven %>
-                        <% if (productos[i].usuario_usu === usuario) { %>
-                            <a href=<%= '/ventas/aumentarCantidad/' + productos[i].id_ven + '?_method=PUT' %>><img class="plus" src="/images/ventas/190250.png"></a>
-                        <% } else { %>
-                            <button><a href=<%= '/compras/comprar/' + usuario + '/' + productos[i].id_ven + '?_method=POST' %>>Comprar</a></button>
-                        <% } %>
                     </p>
+                    <% if (productos[i].usuario_usu === usuario) { %>
+                        <a href=<%= '/ventas/aumentarCantidad/' + productos[i].id_ven + '?_method=PUT' %>><img class="plus" src="/images/ventas/190250.png"></a>
+                    <% } %>
                     <span><%= productos[i].usuario_usu %></span>
                 </div>
             <% } %>
