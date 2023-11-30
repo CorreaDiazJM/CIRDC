@@ -10,12 +10,9 @@ const error = {};
 router.get('/', checkLogin, async (req, res) => {
     const { rol } = req.token_data;
 
-    console.log(rol);
-
     await DocumentosController.mostrar(rol)
         .catch((err) => res.send(err))
         .then((documentos) => {
-            console.log(documentos);
             res.render('documentos/home', { documentos, rol });
         });
 });
