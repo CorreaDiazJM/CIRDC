@@ -20,13 +20,11 @@ router.use((req, res, next) => {
 });
 
 router.get('/', checkLogin, async (req, res) => {
-    const { rol } = req.token_data;
+    const { rol, usuario } = req.token_data;
 
     await VentasController.mostrar(rol)
         .catch((err) => res.send(err))
-        .then((productos) => res.render('productos/home', { productos }));
-
-    res.render('productos/home');
+        .then((productos) => res.render('productos/home', { productos, usuario }));
 });
 
 router.get('/registrarProducto', checkLogin, async (req, res) => {
@@ -45,8 +43,6 @@ router.get('/registrarProducto', checkLogin, async (req, res) => {
 
 router.post('/registrarProducto', checkLogin, async (req, res) => {
     const { usuario } = req.token_data;
-
-    console.log(req.body);
 
     if (req.body.producto && req.body.cantidad) {
         const { producto, cantidad } = req.body;

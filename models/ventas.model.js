@@ -8,15 +8,19 @@ class VentasModel {
             this.buscarProductoPorDatos(producto, usuario)
                 .catch((err) => reject(err))
                 .then((productoData) => {
-                    if (productoData) {
+                    if (productoData.length) {
                         reject('El producto ya está registrado');
                     } else {
-                        db.query(
-                            'INSERT INTO Ventas (producto_ven, cantidad_ven, id_usu_ven) VALUES (?, ?, ?);',
-                            [producto, cantidad, productoData.id_usu],
-                            (err) => {
-                                if (err) reject(err);
-                                resolve();
+                        UsuarioModel.buscarUsuarioPorUsername(usuario)
+                            .catch((err) => reject(err))
+                            .then((user) => {
+                                db.query(
+                                    'INSERT INTO Ventas (producto_ven, cantidad_ven, id_usu_ven) VALUES (?, ?, ?);',
+                                    [producto, cantidad, user.id_usu],
+                                    (err) => {
+                                        if (err) reject(err);
+                                        resolve();
+                                    });
                             });
                     }
                 });
@@ -54,22 +58,33 @@ class VentasModel {
 
     async buscarProductoPorId(idVenta) {
         return new Promise((resolve, reject) => {
-            db.query('SELECT * FROM Ventas WHERE id_ven = ?;', [idVenta])
+            db.query('SELECT * FROM Ventas WHERE id_ven = ?;', [idVenta], (err, results) => {
+                if (err) reject(err);
+                resolve(results);
+            });
         });
     }
 
-    async aumentarOferta(usuario, producto) {
+    async aumentarOferta(idVenta) {
         return new Promise((resolve, reject) => {
-            this.buscarProductoPorDatos(producto, usuario)
+            this.buscarProductoPorId(idVenta)
                 .catch((err) => reject(err))
-                .then((productosData) => {
-                    let { cantidad_ven, id_ven } = productosData;
-                    
-                    cantidad_ven += 1;
+                .then((producto) => {
+                    if (producto) {
+                        let { cantidad_ven } = producto[0];
 
-                    db.query('UPDATE Ventas SET cantidad_ven = ' + cantidad_ven + ' WHERE id_ven = ' + id_ven)
-                        .catch((err) => reject(err))
-                        .then(() => resolve());
+                        cantidad_ven++;
+    
+                        db.query(
+                            'UPDATE Ventas SET cantidad_ven = ? WHERE id_ven = ?;',
+                            [cantidad_ven, idVenta],
+                            (err) => {
+                                if (err) reject(err);
+                                resolve();
+                            });
+                    } else {
+                        reject('El producto no está registrado');
+                    }
                 });
         });
     }

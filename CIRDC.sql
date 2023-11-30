@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-11-2023 a las 05:41:34
+-- Tiempo de generación: 29-11-2023 a las 22:06:59
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -56,9 +56,17 @@ CREATE TABLE `Compras` (
 CREATE TABLE `Documentos` (
   `id_doc` int(32) NOT NULL,
   `titulo_doc` varchar(65) NOT NULL,
-  `contenido_doc` text NOT NULL,
-  `imagen_doc` text NOT NULL
+  `contenido_doc` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Documentos`
+--
+
+INSERT INTO `Documentos` (`id_doc`, `titulo_doc`, `contenido_doc`) VALUES
+(23, 'abc', 'abc'),
+(24, 'nuevo', ' esto es un nuevo documento'),
+(25, 'prueba', 'oatrañ asdf sdfsñkfjasfñkasjfñaksdfjasñfjañdsfjañsdfjasñdjfasñdfjasñkfdj');
 
 -- --------------------------------------------------------
 
@@ -110,6 +118,15 @@ CREATE TABLE `Rol_Documento` (
   `id_doc_roldoc` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `Rol_Documento`
+--
+
+INSERT INTO `Rol_Documento` (`id_roldoc`, `id_rol_roldoc`, `id_doc_roldoc`) VALUES
+(21, 6, 23),
+(22, 1, 24),
+(23, 6, 25);
+
 -- --------------------------------------------------------
 
 --
@@ -132,7 +149,8 @@ CREATE TABLE `Usuarios` (
 INSERT INTO `Usuarios` (`id_usu`, `nombre_usu`, `apellido_usu`, `usuario_usu`, `password_usu`, `id_rol_usu`) VALUES
 (6, 'José', 'Correa', 'jose121correa', '$2b$10$aS3LM.E1IM4OhSIT5w1vju..C0ibhNLrXrozixx9c3cMpz9.7vA8a', 6),
 (11, 'José', 'Correa', 'jose', '$2b$10$H0lXChhgQKepW7oIiEXWxe7wuRNuHuY5DH4C5w3a1CZ/Dnym8lG1q', 6),
-(17, 'José', 'Correa', 'admin', '$2b$10$iqtKrqhKdyoT.zFDnuVuzeKZviostS1gO3R4WtXbD91Ns15H6sOgC', 6);
+(17, 'José', 'Correa', 'admin', '$2b$10$iqtKrqhKdyoT.zFDnuVuzeKZviostS1gO3R4WtXbD91Ns15H6sOgC', 1),
+(18, 'José', 'García', 'jsgarcia', '$2b$10$eERG5Ix6AMMH8vqhq.KHF.w6tDjFe12YmlCLNvxl9lW303FytrphC', 6);
 
 -- --------------------------------------------------------
 
@@ -146,6 +164,15 @@ CREATE TABLE `Usuario_Documento` (
   `id_doc_usudoc` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `Usuario_Documento`
+--
+
+INSERT INTO `Usuario_Documento` (`id_usudoc`, `id_usu_usudoc`, `id_doc_usudoc`) VALUES
+(18, 6, 23),
+(19, 17, 24),
+(20, 18, 25);
+
 -- --------------------------------------------------------
 
 --
@@ -158,6 +185,13 @@ CREATE TABLE `Ventas` (
   `cantidad_ven` int(20) NOT NULL,
   `id_usu_ven` int(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Ventas`
+--
+
+INSERT INTO `Ventas` (`id_ven`, `producto_ven`, `cantidad_ven`, `id_usu_ven`) VALUES
+(1, 'cabezas', 20, 6);
 
 --
 -- Índices para tablas volcadas
@@ -183,8 +217,7 @@ ALTER TABLE `Compras`
 -- Indices de la tabla `Documentos`
 --
 ALTER TABLE `Documentos`
-  ADD PRIMARY KEY (`id_doc`),
-  ADD UNIQUE KEY `imagen_doc` (`imagen_doc`) USING HASH;
+  ADD PRIMARY KEY (`id_doc`);
 
 --
 -- Indices de la tabla `Pagos`
@@ -250,7 +283,7 @@ ALTER TABLE `Compras`
 -- AUTO_INCREMENT de la tabla `Documentos`
 --
 ALTER TABLE `Documentos`
-  MODIFY `id_doc` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_doc` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `Pagos`
@@ -268,25 +301,25 @@ ALTER TABLE `Roles`
 -- AUTO_INCREMENT de la tabla `Rol_Documento`
 --
 ALTER TABLE `Rol_Documento`
-  MODIFY `id_roldoc` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_roldoc` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `Usuarios`
 --
 ALTER TABLE `Usuarios`
-  MODIFY `id_usu` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_usu` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `Usuario_Documento`
 --
 ALTER TABLE `Usuario_Documento`
-  MODIFY `id_usudoc` int(32) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usudoc` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `Ventas`
 --
 ALTER TABLE `Ventas`
-  MODIFY `id_ven` int(32) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ven` int(32) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
